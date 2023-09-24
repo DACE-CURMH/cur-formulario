@@ -130,7 +130,7 @@ DIVISIÓN DE ADMISIÓN Y CONTROL DE ESTUDIOS`;
           style: 'table',
           table: {
             headerRows: 0,
-            widths: ['*', '*', '*', '*'],
+            widths: ['25%', '25%', '25%', '25%'],
 
             body: [
               [{ text: 'DATOS PERSONALES', style: 'key', colSpan: 4 }, {}, {}, {}],
