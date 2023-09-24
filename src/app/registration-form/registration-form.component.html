@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="card col-sm-8 mx-auto">
+        <h2 class="card-header">Proceso de Preinscripción</h2>
+        <div class="card-body text-center">
+            <h3>Ha completado el proceso de preinscripción exitósamente.</h3>
+            <hr>
+            <h5>Debe asistir a la Institución el día <strong>{{candidateService.candidate.fechaInscripcion}}</strong> en el horario comprendido entre <strong>9:00 a.m. y 2:30 p.m.</strong></h5>
+            <h5>Por favor, no lleve acompañantes.</h5>
+            <h5>Es importante señalar que debe asistir el día indicado debido a que<br><strong>NO HABRÁ PRÓRROGA</strong>.</h5>
+            <hr>
+            <div class="row">
+                <div class="col-sm-4">
+                    <button class="button" type="submit" class="btn btn-success" (click)="downloadPdf()">Descargar planilla</button>
+                </div>
+                <div class="col-sm-4 d-none d-sm-none d-md-block">
+                    <button class="button" type="submit" class="btn btn-info" (click)="openPdf()">Ver planilla</button>
+                </div>
+                <div class="col-sm-4">
+                    <button class="button" type="submit" class="btn btn-danger"  routerLink="/verify">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

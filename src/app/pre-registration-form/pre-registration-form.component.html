@@ -1,0 +1,332 @@
+<div class="container">
+    <h2 class="text-center">Formulario de Preinscripción</h2>
+
+    <form [formGroup]="preRegistrationForm" (ngSubmit)="onSubmit()">
+        <div class="card">
+            <h5 class="card-header">Datos Personales</h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3 position-relative">
+                            <input type="text"
+                                [className]="this.preRegistrationForm.get('nombre1')?.valid ? 'form-control' : 'form-control is-invalid'"
+                                (input)="this.preRegistrationForm.get('nombre1')?.setValue(nombre1.value.trimStart())"
+                                id="nombre1" name="nombre1" placeholder="" formControlName="nombre1" maxlength="15"
+                                autocomplete="off" #nombre1>
+                            <div [hidden]="(!processing && nombre1.value.trim().length == 0)" class="invalid-tooltip">
+                                {{(nombre1.value.trim().length > 0 ? 'Sólo se permiten caracteres alfabéticos y espacios' : 'Campo obligatorio')}}
+                            </div>
+                            <label for="nombre1">Primer nombre</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text"
+                                [className]="this.preRegistrationForm.get('nombre2')?.valid ? 'form-control' : 'form-control is-invalid'"
+                                placeholder="" 
+                                (input)="this.preRegistrationForm.get('nombre2')?.setValue(nombre2.value.trimStart())"
+                                formControlName="nombre2" maxlength="15" autocomplete="off" #nombre2>
+                            <div class="invalid-tooltip">Sólo se permiten caracteres alfabéticos y espacios</div>
+                            <label for="nombre2">Segundo nombre</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text"
+                                [className]="this.preRegistrationForm.get('apellido1')?.valid ? 'form-control' : 'form-control is-invalid'"
+                                id="apellido1" name="apellido1" placeholder=""
+                                (input)="this.preRegistrationForm.get('apellido1')?.setValue(apellido1.value.trimStart())"
+                                maxlength="15" autocomplete="off" #apellido1>
+                            <div [hidden]="(!processing && apellido1.value.trim().length == 0)" class="invalid-tooltip">
+                                {{(apellido1.value.trim().length > 0 ? 'Sólo se permiten caracteres alfabéticos y espacios' : 'Campo obligatorio')}}
+                            </div>
+                            <label for="apellido1">Primer apellido</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" 
+                                [className]="this.preRegistrationForm.get('apellido2')?.valid ? 'form-control' : 'form-control is-invalid'" id="apellido2" name="apellido2" placeholder=""
+                                (input)="this.preRegistrationForm.get('apellido2')?.setValue(apellido2.value.trimStart())"
+                                maxlength="15" autocomplete="off" #apellido2>
+                            <div class="invalid-tooltip">Sólo se permiten caracteres alfabéticos y espacios</div>
+                                <label for="apellido2">Segundo apellido</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <select
+                                [className]="this.preRegistrationForm.get('sexo')?.valid ? 'form-select' : 'form-select is-invalid'"
+                                id="sexo" name="sexo" formControlName="sexo">
+                                <option *ngFor="let sexo of sexos" [value]="sexo.id">{{sexo.value}}</option>
+                            </select>
+                            <div [hidden]="!processing" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="sexo">Sexo biológico</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <select
+                                [className]="this.preRegistrationForm.get('estadoCivil')?.valid ? 'form-select' : 'form-select is-invalid'"
+                                id="estadoCivil" name="estadoCivil" formControlName="estadoCivil">
+                                <option *ngFor="let estadoCivil of estadosCiviles" [value]="estadoCivil.id">
+                                    {{estadoCivil.value}}
+                                </option>
+                            </select>
+                            <div [hidden]="!processing" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="estadoCivil">Estado civil</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <input
+                                [className]="this.preRegistrationForm.get('fechaNacimiento')?.valid ? 'form-control' : 'form-control is-invalid'"
+                                type="date" name="fechaNacimiento" id="fechaNacimiento"
+                                formControlName="fechaNacimiento">
+                            <div [hidden]="!processing" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="fechaNacimiento">Fecha de nacimiento</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <select
+                                [className]="this.preRegistrationForm.get('lugarNacimientoPais')?.valid ? 'form-select' : 'form-select is-invalid'"
+                                id="lugarNacimientoPais" name="lugarNacimientoPais"
+                                formControlName="lugarNacimientoPais" #lugarNacimientoPaisId
+                                (change)="onSelectionChangeNacimientoPais(lugarNacimientoPaisId.value)">
+                                <option *ngFor="let pais of nacimientoPaises" [value]="pais.id">{{pais.value}}</option>
+                            </select>
+                            <div [hidden]="!processing" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="lugarNacimientoPais">País de nacimiento</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <select
+                                [className]="this.preRegistrationForm.get('lugarNacimientoEstado')?.disabled || this.preRegistrationForm.get('lugarNacimientoEstado')?.valid ? 'form-select' : 'form-select is-invalid'"
+                                id="lugarNacimientoEstado" name="lugarNacimientoEstado"
+                                formControlName="lugarNacimientoEstado">
+                                <option *ngFor="let estado of nacimientoEstados" [value]="estado.id">
+                                    {{estado.value}}</option>
+                            </select>
+                            <div [hidden]="!processing && this.preRegistrationForm.get('lugarNacimientoEstado')?.enabled" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="lugarNacimientoEstado">Estado de nacimiento</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h5 class="card-header">Información de Contacto</h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <input type="text"
+                                [className]="this.preRegistrationForm.get('telefonoHabitacion')?.valid ? 'form-control' : 'form-control is-invalid'"
+                                id="telefonoHabitacion" name="telefonoHabitacion" formControlName="telefonoHabitacion"
+                                placeholder="" autocomplete="off" inputmode="numeric" (paste)="false"
+                                mask="(0000)-0000000" (paste)="false">
+                            <div [hidden]="!processing" class="invalid-tooltip">Número telefónico incompleto</div>
+                            <label for="telefonoHabitacion">Teléfono de habitación</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <input type="text"
+                                [className]="this.preRegistrationForm.get('telefonoCelular')?.valid ? 'form-control' : 'form-control is-invalid'"
+                                id="telefonoCelular" name="telefonoCelular" formControlName="telefonoCelular"
+                                placeholder="" autocomplete="off" inputmode="numeric" (paste)="false"
+                                mask="(0000)-0000000" (paste)="false">
+                            <div [hidden]="!processing" class="invalid-tooltip">Número telefónico incompleto</div>
+                            <label for="telefonoCelular">Teléfono celular</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <input type="text"
+                                [className]="this.preRegistrationForm.get('correoElectronico')?.valid ? 'form-control' : 'form-control is-invalid'"
+                                id="correoElectronico" name="correoElectronico"
+                                (input)="this.preRegistrationForm.get('correoElectronico')?.setValue(correoElectronico.value.trimStart())"
+                                id="correoElectronico" formControlName="correoElectronico" autocomplete="off"
+                                placeholder="" #correoElectronico>
+                            <div [hidden]="(!processing)" class="invalid-tooltip">
+                                {{(correoElectronico.value.trim().length > 0 ? 'Dirección de correo electrónico incompleta' : 'Campo obligatorio')}}
+                            </div>
+                            <label for="correoElectronico">Correo electrónico</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h5 class="card-header">Dirección de Habitación</h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <select
+                                [className]="this.preRegistrationForm.get('direccionEstado')?.valid ? 'form-control' : 'form-control is-invalid'"
+                                id="direccionEstado" name="direccionEstado" formControlName="direccionEstado"
+                                #direccionEstadoId
+                                (change)="onSelectionChangeDireccionEstado(direccionEstadoId.value);  onSelectionChangeDireccionMunicipio(direccionEstadoId.value, direccionMunicipioId.value); onSelectionChangeDireccionParroquia(direccionParroquiaId.value)">
+                                <option *ngFor="let estado of direccionEstados" [value]="estado.id">
+                                    {{estado.value}}
+                                </option>
+                            </select>
+                            <div [hidden]="!processing && this.preRegistrationForm.get('direccionEstado')?.enabled" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="direccionEstado">Estado</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <select
+                                [className]="this.preRegistrationForm.get('direccionMunicipio')?.disabled || this.preRegistrationForm.get('direccionMunicipio')?.valid ? 'form-control' : 'form-control is-invalid'"
+                                id="direccionMunicipio" name="direccionMunicipio"
+                                (change)="onSelectionChangeDireccionMunicipio(direccionEstadoId.value, direccionMunicipioId.value); onSelectionChangeDireccionParroquia(direccionParroquiaId.value)"
+                                formControlName="direccionMunicipio" #direccionMunicipioId>
+                                <option *ngFor="let municipio of direccionMunicipios" [value]="municipio.id">
+                                    {{municipio.value}}
+                                </option>
+                            </select>
+                            <div [hidden]="!processing && this.preRegistrationForm.get('direccionMunicipio')?.enabled" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="estado">Municipio</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <select
+                                [className]="this.preRegistrationForm.get('direccionParroquia')?.disabled || this.preRegistrationForm.get('direccionParroquia')?.valid ? 'form-control' : 'form-control is-invalid'"
+                                id="direccionParroquia" name="direccionParroquia"
+                                (change)="onSelectionChangeDireccionParroquia(direccionParroquiaId.value);"
+                                formControlName="direccionParroquia" #direccionParroquiaId>
+                                <option *ngFor="let parroquia of direccionParroquias" [value]="parroquia.id">
+                                    {{parroquia.value}}</option>
+                            </select>
+                            <div [hidden]="!processing && this.preRegistrationForm.get('direccionParroquia')?.enabled" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="parroquia">Parroquia</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input type="text"
+                                [className]="this.preRegistrationForm.get('direccionHabitacion')?.disabled || this.preRegistrationForm.get('direccionHabitacion')?.valid ? 'form-control' : 'form-control is-invalid'"
+                                id="direccionHabitacion" name="direccionHabitacion"
+                                (input)="this.preRegistrationForm.get('direccionHabitacion')?.setValue(direccionHabitacion.value.trimStart())"
+                                placeholder="" formControlName="direccionHabitacion" autocomplete="off"
+                                #direccionHabitacion>
+                            <div [hidden]="!processing && this.preRegistrationForm.get('direccionHabitacion')?.enabled" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="direccionHabitacion">Dirección</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h5 class="card-header">Discapacidad</h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <select
+                                [className]="this.preRegistrationForm.get('discapacidad')?.valid ? 'form-select' : 'form-select is-invalid'"
+                                id="discapacidad" name="discapacidad"
+                                (change)="onSelectionChangeDiscapacidad(discapacidadId.value)"
+                                formControlName="discapacidad" #discapacidadId>
+                                <option *ngFor="let respuesta of si_no" [value]="respuesta.id">
+                                    {{respuesta.value}}</option>
+                            </select>
+                            <div [hidden]="!processing && this.preRegistrationForm.get('discapacidad')?.enabled" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="discapacidad">¿Tiene algún tipo de discapacidad?</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <select
+                                [className]="this.preRegistrationForm.get('tipoDiscapacidad')?.disabled || this.preRegistrationForm.get('tipoDiscapacidad')?.valid ? 'form-select' : 'form-select is-invalid'"
+                                id="tipoDiscapacidad" name="tipoDiscapacidad" formControlName="tipoDiscapacidad">
+                                <option *ngFor="let tipoDiscapacidad of tipoDiscapacidades"
+                                    [value]="tipoDiscapacidad.id">
+                                    {{tipoDiscapacidad.value}}</option>
+                            </select>
+                            <div [hidden]="!processing && this.preRegistrationForm.get('tipoDiscapacidad')?.enabled" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="tipoDiscapacidad">Indique el tipo de discapacidad</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <input type="text"
+                                [className]="this.preRegistrationForm.get('carnetDiscapacidad')?.disabled || this.preRegistrationForm.get('carnetDiscapacidad')?.valid ? 'form-control' : 'form-control is-invalid'"
+                                id="carnetDiscapacidad" name="carnetDiscapacidad"
+                                (input)="this.preRegistrationForm.get('carnetDiscapacidad')?.setValue(carnetDiscapacidad.value.trimStart())" placeholder=""
+                                formControlName="carnetDiscapacidad" autocomplete="off" #carnetDiscapacidad>
+                            <div [hidden]="!processing && this.preRegistrationForm.get('carnetDiscapacidad')?.enabled" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="carnetDiscapacidad">Carnet de discapacidad</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h5 class="card-header">Datos Académicos</h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <select
+                                [className]="this.preRegistrationForm.get('nivelAcademico')?.valid ? 'form-select' : 'form-select is-invalid'"
+                                id="nivelAcademico" name="nivelAcademico" formControlName="nivelAcademico">
+                                <option *ngFor="let nivelAcademico of nivelesAcademicos" [value]="nivelAcademico.id">
+                                    {{nivelAcademico.value}}</option>
+                            </select>
+                            <div [hidden]="!processing && this.preRegistrationForm.get('nivelAcademico')?.enabled" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="nivelAcademico">Nivel académico</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="sniRusnies" name="sniRusnies" placeholder=""
+                                (input)="this.preRegistrationForm.get('sniRusnies')?.setValue(sniRusnies.value.trimStart())" formControlName="sniRusnies"
+                                autocomplete="off" #sniRusnies>
+                            <label for="sniRusnies">Número SNI (RUSNIES o CNU)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card border-0">
+            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success" [disabled]="buttonSendEnabled">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

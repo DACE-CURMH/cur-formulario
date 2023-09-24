@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="card col-sm-8 mx-auto">
+        <h2 class="card-header">Proceso de Preinscripción</h2>
+        <div class="card-body text-center">
+            <h3>Por favor, ingrese su número de cédula de identidad</h3>
+            <form  [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
+                <div class="col-md-6 mx-auto">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="cedula" id="cedula" formControlName="cedula" class="form-control"
+                            placeholder="" digitOnly inputmode="numeric" maxlength="9" autocomplete="off">
+                        <label for="cedula">Cédula de identidad</label>
+                    </div>
+                </div>
+                <button class="button" type="submit" class="btn btn-primary" [disabled]="verifyForm.invalid || processing" #submit>Comprobar</button>
+            </form>
+        </div>
+    </div>
+</div>
