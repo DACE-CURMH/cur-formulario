@@ -24,8 +24,8 @@ export const RECAUDOS: Data[] = [
     { id: 20, value: 'Colaborar con un (1) marcador de tinta indeleble (negro, azul o rojo).', value2: 'Órtesis y Prótesis', value3: '' },
     { id: 21, value: 'Colaborar con una (1) botellita de pega blanca escolar.', value2: 'Órtesis y Prótesis', value3: '' },
     { id: 22, value: 'Colaborar con una (1) caja de grapas (lisas o corrugadas).', value2: 'Terapia Ocupacional', value3: '' },
-    { id: 23, value: 'Colaborar con una (1) carpeta marrón en buen estado (tamaño carta u oficio).', value2: 'Órtesis y Prótesis', value3: '' },
-    { id: 24, value: 'Colaborar con una (1) caja de chinches.', value2: 'Órtesis y Prótesis', value3: '' },
+    { id: 23, value: 'Colaborar con una (1) carpeta marrón en buen estado (tamaño carta u oficio).', value2: 'Terapia Ocupacional', value3: '' },
+    { id: 24, value: 'Colaborar con una (1) caja de chinches.', value2: 'Terapia Ocupacional', value3: '' },
     { id: 25, value: 'Colaborar con un (1) borrador para pizarra acrílica.', value2: 'Órtesis y Prótesis', value3: '' }
 
 ];
