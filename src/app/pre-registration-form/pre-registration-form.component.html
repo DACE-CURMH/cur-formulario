@@ -163,7 +163,7 @@
                             <input type="text"
                                 [className]="this.preRegistrationForm.get('correoElectronico')?.valid ? 'form-control' : 'form-control is-invalid'"
                                 id="correoElectronico" name="correoElectronico"
-                                (input)="this.preRegistrationForm.get('correoElectronico')?.setValue(correoElectronico.value.trimStart())"
+                                (input)="this.preRegistrationForm.get('correoElectronico')?.setValue(correoElectronico.value.trim())"
                                 id="correoElectronico" formControlName="correoElectronico" autocomplete="off"
                                 placeholder="" #correoElectronico>
                             <div [hidden]="(!processing)" class="invalid-tooltip">
