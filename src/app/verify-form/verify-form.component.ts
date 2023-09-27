@@ -32,6 +32,10 @@ export class VerifyFormComponent {
         .verifyCedula(cedula)
         .subscribe(e => {
           switch (e.result) {
+            case 'Proceso cerrado':
+              this.candidateService.candidate = JSON.parse(decodeURI(atob(e.data)));
+              alert(`El proceso de preinscripción al PNF en ${this.candidateService.candidate.pnf} ha finalizado.`)
+              break;
             case 'Registrado':
               this.candidateService.candidate = JSON.parse(decodeURI(atob(e.data)));
               alert("Ya ha realizado el proceso de preinscripción");
