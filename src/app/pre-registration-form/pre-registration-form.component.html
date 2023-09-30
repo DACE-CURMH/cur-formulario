@@ -163,7 +163,7 @@
                             <input type="text"
                                 [className]="this.preRegistrationForm.get('correoElectronico')?.valid ? 'form-control' : 'form-control is-invalid'"
                                 id="correoElectronico" name="correoElectronico"
-                                (input)="this.preRegistrationForm.get('correoElectronico')?.setValue(correoElectronico.value.trimStart())"
+                                (input)="this.preRegistrationForm.get('correoElectronico')?.setValue(correoElectronico.value.trim())"
                                 id="correoElectronico" formControlName="correoElectronico" autocomplete="off"
                                 placeholder="" #correoElectronico>
                             <div [hidden]="(!processing)" class="invalid-tooltip">
@@ -324,7 +324,7 @@
         <div class="card border-0">
             <div class="card-body">
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-success" [disabled]="buttonSendEnabled">Enviar</button>
+                    <button type="submit" class="btn btn-success" [disabled]="buttonSendDisabled">Enviar</button>
                 </div>
             </div>
         </div>

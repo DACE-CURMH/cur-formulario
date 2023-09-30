@@ -9,7 +9,7 @@ import { Result } from './result';
 })
 export class CandidateService {
 
-  private url = 'https://script.google.com/macros/s/AKfycbw0pfY888yYwcV1aQ3Ddj1uvuTEMMRDWRN26x0qUIrbQxzZsjFbQ1pw5O6rY0nhvSRk/exec';
+  private url = 'https://script.google.com/macros/s/AKfycbxtE5IA3wtjjDrGQKzmTVUUHSZ1vr7V41qIQEZ3RZK1E-ulhg70Mk6f-dbhcAZ_sJ9rBA/exec';
   public candidate: Candidate = new Candidate();
   
   private httpOptions = {

@@ -33,7 +33,7 @@ export class PreRegistrationFormComponent extends Tools implements OnInit {
   processing = false;
   regExpAlpha = /^([a-zA-ZñÑáéíóúüÁÉÍÓÚÜàèìòùÀÈÌÒÙäëïöüÄËÏÖÜäëïöüÄËÏÖÜ ]{0,15})$/
   regExpEmail = /^[a-zA-Z0-9]{1}[\w.-]{0,62}[a-zA-Z0-9]{1}[@]{1}[a-zA-Z0-9]{1}[\w.-]{2,183}[a-zA-Z0-9]{1}[.]{1}[a-zA-Z0-9]{1,}$/;
-  buttonSendEnabled = true;
+  buttonSendDisabled = false;
 
   constructor(
     public candidateService: CandidateService,
@@ -89,17 +89,6 @@ export class PreRegistrationFormComponent extends Tools implements OnInit {
     let regex = /^(\(\d{4}\)-\d{7})$/g;
     return this.validate(phoneNumber, regex);
   }
-
-  // formatterPhoneNumber(phoneNumber: string): string {
-  //   let regexCode = /^(\d{4})$/g;
-  //   let _phoneNumber = phoneNumber;
-
-  //   if (regexCode.test(phoneNumber)) {
-  //     _phoneNumber += '-';
-  //   }
-
-  //   return _phoneNumber;
-  // }
 
   validateEmail(email: string): boolean {
     let regex = /^([\w\d._%+-]+@[\w\d._]+\.[\w]{2,4})$/g;
@@ -213,7 +202,7 @@ export class PreRegistrationFormComponent extends Tools implements OnInit {
 
   onSubmit() {
     this.processing = true;
-    this.buttonSendEnabled = false;
+    this.buttonSendDisabled = true;
 
     if (this.preRegistrationForm.valid) {
       this.processData();
@@ -227,8 +216,9 @@ export class PreRegistrationFormComponent extends Tools implements OnInit {
           });
     }else{
       alert('Se encontraron problemas en uno o mas campos.\nPor favor, revíselos antes de continuar.');
+      this.buttonSendDisabled = false;
     }
 
-    this.buttonSendEnabled = true;
+    
   }
 }
