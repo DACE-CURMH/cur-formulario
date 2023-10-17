@@ -11,13 +11,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { DigitOnlyModule } from '@uiowa/digit-only';
 import { CandidateService } from './candidate.service';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { HorariosComponent } from './horarios/horarios.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VerifyFormComponent,
     RegistrationFormComponent,
-    PreRegistrationFormComponent
+    PreRegistrationFormComponent,
+    HorariosComponent
   ],
   imports: [
     BrowserModule,

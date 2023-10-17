@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="card col-sm-8 mx-auto">
+        <h2 class="card-header">Consulta de Horarios - Periodo 2023-2</h2>
+        <div class="card-body text-center">
+            <h3>Por favor, indique su PNF, el trayecto y su sección</h3>
+            <form  [formGroup]="horarioForm" (ngSubmit)="onSubmit(pnf.value, trayecto.value, seccion.value)">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <select
+                                [className]="this.horarioForm.get('pnf')?.valid ? 'form-control' : 'form-control is-invalid'"
+                                id="pnf" name="pnf" formControlName="pnf"
+                                #pnf
+                                (change)="onSelectionChangePnf(pnf.value); onSelectionChangeTrayecto(pnf.value, trayecto.value)">
+                                <option *ngFor="let pnf of pnfs" [value]="pnf.value2">
+                                    {{pnf.value}}
+                                </option>
+                            </select>
+                            <div [hidden]="!processing && this.horarioForm.get('pnf')?.enabled" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="trayecto">Plan Nacional de Formación</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <select
+                                [className]="this.horarioForm.get('trayecto')?.valid ? 'form-control' : 'form-control is-invalid'"
+                                id="trayecto" name="trayecto" formControlName="trayecto"
+                                #trayecto
+                                (change)="onSelectionChangeTrayecto(pnf.value, trayecto.value);">
+                                <option *ngFor="let trayecto of trayectosFiltradas" [value]="trayecto.value2">
+                                    {{trayecto.value2}}
+                                </option>
+                            </select>
+                            <div [hidden]="!processing && this.horarioForm.get('trayecto')?.enabled" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="trayecto">Trayecto</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <select
+                                [className]="this.horarioForm.get('seccion')?.valid ? 'form-control' : 'form-control is-invalid'"
+                                id="seccion" name="seccion" formControlName="seccion"
+                                #seccion>
+                                <option *ngFor="let seccion of seccionesFiltradas" [value]="seccion">
+                                    {{seccion}}
+                                </option>
+                            </select>
+                            <div [hidden]="!processing && this.horarioForm.get('seccion')?.enabled" class="invalid-tooltip">Campo obligatorio</div>
+                            <label for="seccion">Sección</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success" [disabled]="buttonSendDisabled">Descargar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
